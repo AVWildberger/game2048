@@ -8,7 +8,7 @@ namespace game2048
         /// Sets the theme of the game.
         /// </summary>
         /// <param name="theme">red, green, blue, magenta | default: empty</param>
-        public void SetTheme(string theme = "")
+        static public void SetTheme(string theme = "")
         {
             switch (theme)
             {

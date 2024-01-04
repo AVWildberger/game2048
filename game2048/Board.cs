@@ -25,26 +25,10 @@ namespace game2048
             return _board.GetLength(dimension);
         }
 
-        /// <summary>
-        /// Gets the number of a certain point on the board.
-        /// </summary>
-        /// <param name="row">row where the number is.</param>
-        /// <param name="col">col where the number is.</param>
-        /// <returns>number at row, col.</returns>
-        public int GetNumber(int row, int col)
+        public int this[int row, int col]
         {
-            return _board[row, col];
-        }
-
-        /// <summary>
-        /// Sets the number at a certain point on the board.
-        /// </summary>
-        /// <param name="number">number to set.</param>
-        /// <param name="row">row where the number should be.</param>
-        /// <param name="col">col where the number should be.</param>
-        public void SetNumber(int number, int row, int col)
-        {
-            _board[row, col] = number;
+            get { return _board[row, col]; }
+            set { _board[row, col] = value; }
         }
 
         /// <summary>
@@ -87,10 +71,10 @@ namespace game2048
                     {
                         currentCol--;
 
-                        if (GetNumber(row, col) == GetNumber(row, currentCol))
+                        if (this[row, col] == this[row, currentCol])
                         {
-                            SetNumber(0, row, col);
-                            SetNumber(GetNumber(row, currentCol) * 2, row, currentCol);
+                            this[row, col] = 0;
+                            this[row, currentCol] *= 2;
                         }
                     } while (_board[row, currentCol] == 0 && currentCol != 0);
                 } while (currentCol != 0);
@@ -101,10 +85,10 @@ namespace game2048
                 {
                     for (int col = _board.GetLength(0) - 1; col > 0; col--)
                     {
-                        if (GetNumber(row, col - 1) == 0)
+                        if (this[row, col - 1] == 0)
                         {
-                            SetNumber(GetNumber(row, col), row, col - 1);
-                            SetNumber(0, row, col);
+                            this[row, col - 1] = this[row, col];
+                            this[row, col] = 0;
                         }
                     }
                 }
@@ -129,10 +113,10 @@ namespace game2048
                     {
                         currentCol++;
 
-                        if (GetNumber(row, col) == GetNumber(row, currentCol))
+                        if (this[row, col] == this[row, currentCol])
                         {
-                            SetNumber(0, row, col);
-                            SetNumber(GetNumber(row, currentCol) * 2, row, currentCol);
+                            this[row, col] = 0;
+                            this[row, currentCol] *= 2;
                         }
                     } while (_board[row, currentCol] == 0 && currentCol != _board.GetLength(0) - 1);
                 } while (currentCol != _board.GetLength(0) - 1);
@@ -142,10 +126,10 @@ namespace game2048
                 {
                     for (int col = 0; col < _board.GetLength(0) - 1; col++)
                     {
-                        if (GetNumber(row, col + 1) == 0)
+                        if (this[row, col + 1] == 0)
                         {
-                            SetNumber(GetNumber(row, col), row, col + 1);
-                            SetNumber(0, row, col);
+                            this[row, col + 1] = this[row, col];
+                            this[row, col] = 0;
                         }
                     }
                 }
@@ -170,10 +154,10 @@ namespace game2048
                     {
                         currentRow++;
 
-                        if (GetNumber(row, col) == GetNumber(currentRow, col))
+                        if (this[row, col] == this[currentRow, col])
                         {
-                            SetNumber(0, row, col);
-                            SetNumber(GetNumber(currentRow, col) * 2, currentRow, col);
+                            this[row, col] = 0;
+                            this[currentRow, col] *= 2;
                         }
                     } while (_board[currentRow, col] == 0 && currentRow != _board.GetLength(1) - 1);
                 } while (currentRow != _board.GetLength(1) - 1);
@@ -183,10 +167,10 @@ namespace game2048
                 {
                     for (int row = 0; row < _board.GetLength(1) - 1; row++)
                     {
-                        if (GetNumber(row + 1, col) == 0)
+                        if (this[row + 1, col] == 0)
                         {
-                            SetNumber(GetNumber(row, col), row + 1, col);
-                            SetNumber(0, row, col);
+                            this[row + 1, col] = this[row, col];
+                            this[row, col] = 0;
                         }
                     }
                 }
@@ -211,10 +195,10 @@ namespace game2048
                     {
                         currentRow--;
 
-                        if (GetNumber(row, col) == GetNumber(currentRow, col))
+                        if (this[row, col] == this[currentRow, col])
                         {
-                            SetNumber(0, row, col);
-                            SetNumber(GetNumber(currentRow, col) * 2, currentRow, col);
+                            this[row, col] = 0;
+                            this[currentRow, col] *= 2;
                         }
                     } while (_board[currentRow, col] == 0 && currentRow != 0);
                 } while (currentRow != 0);
@@ -224,10 +208,10 @@ namespace game2048
                 {
                     for (int row = _board.GetLength(1) - 1; row > 0; row--)
                     {
-                        if (GetNumber(row - 1, col) == 0)
+                        if (this[row - 1, col] == 0)
                         {
-                            SetNumber(GetNumber(row, col), row - 1, col);
-                            SetNumber(0, row, col);
+                            this[row - 1, col] = this[row, col];
+                            this[row, col] = 0;
                         }
                     }
                 }

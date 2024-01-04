@@ -9,7 +9,7 @@ namespace game2048
         /// </summary>
         /// <param name="board">game board</param>
         /// <param name="row">row where the horizontal lines are printed</param>
-        public void PrintHorizontalWalls(Board board, int row = -1) // │   │
+        static public void PrintHorizontalWalls(Board board, int row = -1) // │   │
         {
             string spaceBeforeValue;
             string spaceAfterValue;
@@ -22,11 +22,11 @@ namespace game2048
                 }
                 else if (row > -1 && col > -1)
                 {
-                    spaceBeforeValue = new string(' ', (7 - board.GetNumber(row, col).ToString().Length) / 2);
-                    spaceAfterValue = new string(' ', 7 - board.GetNumber(row, col).ToString().Length - spaceBeforeValue.Length);
+                    spaceBeforeValue = new string(' ', (7 - board[row, col].ToString().Length) / 2);
+                    spaceAfterValue = new string(' ', 7 - board[row, col].ToString().Length - spaceBeforeValue.Length);
 
                     Console.Write($"│{spaceBeforeValue}");
-                    Console.Write(board.GetNumber(row, col) != 0 ? board.GetNumber(row, col) : " ");
+                    Console.Write(board[row, col] != 0 ? board[row, col] : " ");
                     Console.Write(spaceAfterValue);
                 }
                 else
@@ -40,7 +40,7 @@ namespace game2048
         /// Prints the middle walls
         /// </summary>
         /// <param name="board">game board</param>
-        public void PrintMiddleWalls(Board board) // ├─┼─┤
+        static public void PrintMiddleWalls(Board board) // ├─┼─┤
         {
             for (int i = 0; i <= board.GetLength(0); i++)
             {
@@ -63,7 +63,7 @@ namespace game2048
         /// Prints the upper walls
         /// </summary>
         /// <param name="board">game board</param>
-        public void PrintUpperWalls(Board board) //┌─┬─┐
+        static public void PrintUpperWalls(Board board) //┌─┬─┐
         {
             for (int i = 0; i <= board.GetLength(0); i++)
             {
@@ -86,7 +86,7 @@ namespace game2048
         /// prints the lower walls
         /// </summary>
         /// <param name="board">game board</param>
-        public void PrintLowerWalls(Board board) //└─┴─┘
+        static public void PrintLowerWalls(Board board) //└─┴─┘
         {
             for (int i = 0; i <= board.GetLength(0); i++)
             {

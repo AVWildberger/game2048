@@ -4,7 +4,7 @@ namespace game2048
 {
     internal class Settings
     {
-        public static readonly int fieldSize = 5; //Min to play: 2 | Min to win: 5
+        public static readonly int fieldSize = 5; //Min to play: 2 | Min to beat 1M: 5
         public static readonly string theme = ""; //red, green, blue, magenta | Leave Empty for default
     }
 }

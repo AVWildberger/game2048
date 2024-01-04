@@ -8,11 +8,8 @@ namespace game2048
         {
             bool shouldRetry;
 
-            Themes themes = new();
-            GameScreens gameScreen = new();
-
-            themes.SetTheme(Settings.theme);
-            gameScreen.StartScreen();
+            Themes.SetTheme(Settings.theme);
+            GameScreens.StartScreen();
 
             do
             {
@@ -46,11 +43,11 @@ namespace game2048
 
                     if (hasWon)
                     {
-                        gameScreen.EndScreen(1);
+                        GameScreens.EndScreen(1);
                     }
                     else
                     {
-                        gameScreen.EndScreen(0);
+                        GameScreens.EndScreen(0);
                     }
 
                     shouldRetry = CheckIfShouldRetry();
@@ -69,9 +66,7 @@ namespace game2048
         /// <param name="board">game board</param>
         static void PrintBoard(Board board)
         {
-            Walls walls = new();
-
-            walls.PrintUpperWalls(board);
+            Walls.PrintUpperWalls(board);
 
             for (int row = 0; row < board.GetLength(1) - 1; row++)
             {
@@ -79,30 +74,30 @@ namespace game2048
                 {
                     if (times == 1)
                     {
-                        walls.PrintHorizontalWalls(board, row);
+                        Walls.PrintHorizontalWalls(board, row);
                     }
                     else
                     {
-                        walls.PrintHorizontalWalls(board);
+                        Walls.PrintHorizontalWalls(board);
                     }
                 }
 
-                walls.PrintMiddleWalls(board);
+                Walls.PrintMiddleWalls(board);
             }
 
             for (int times = 0; times < 3; times++)
             {
                 if (times == 1)
                 {
-                    walls.PrintHorizontalWalls(board, board.GetLength(1) - 1);
+                    Walls.PrintHorizontalWalls(board, board.GetLength(1) - 1);
                 }
                 else
                 {
-                    walls.PrintHorizontalWalls(board);
+                    Walls.PrintHorizontalWalls(board);
                 }
             }
 
-            walls.PrintLowerWalls(board);
+            Walls.PrintLowerWalls(board);
         }
 
         /// <summary>
@@ -164,12 +159,12 @@ namespace game2048
                 {
                     randomRow = rndm.Next(board.GetLength(0));
                     randomCol = rndm.Next(board.GetLength(1));
-                } while (board.GetNumber(randomRow, randomCol) != 0);
+                } while (board[randomRow, randomCol] != 0);
 
                 if (rndm.Next(1, 11) == 10)
-                    board.SetNumber(4, randomRow, randomCol);
+                    board[randomRow, randomCol] = 4;
                 else
-                    board.SetNumber(2, randomRow, randomCol);
+                    board[randomRow, randomCol] = 2;
             }
         }
 
@@ -187,7 +182,7 @@ namespace game2048
             {
                 for (int col = 0; col < board.GetLength(1); col++)
                 {
-                    board2.SetNumber(board.GetNumber(row, col), row, col);
+                    board2[row, col] = board[row, col];
                 }
             }
 
@@ -206,7 +201,7 @@ namespace game2048
                 {
                     for (int col = 0; col < board.GetLength(1); col++)
                     {
-                        if (board2.GetNumber(row, col) != board.GetNumber(row, col))
+                        if (board2[row, col] != board[row, col])
                         {
                             isAnyMovePossible = true;
                         }
@@ -230,7 +225,7 @@ namespace game2048
             {
                 for (int col = 0; col < board.GetLength(1); col++)
                 {
-                    if (board.GetNumber(row, col) == 1048576)
+                    if (board[row, col] > 1000000)
                     {
                         hasWon = true;
                     }

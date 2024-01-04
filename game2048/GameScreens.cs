@@ -61,11 +61,11 @@ namespace game2048
         /// <summary>
         /// Prints the start screen.
         /// </summary>
-        public void StartScreen()
+        static public void StartScreen()
         {
             Console.Clear();
 
-            int waitTime = 750;
+            int waitTime = 400;
 
             for (int i = 0; i < two.Length; i++)
             {
@@ -137,7 +137,7 @@ namespace game2048
         /// prints the end screen
         /// </summary>
         /// <param name="state">0: player has lost | 1: player has won</param>
-        public void EndScreen(byte state)
+        static public void EndScreen(byte state)
         {
             string[] text = { "Error: CS0165" };
             bool error = false;
